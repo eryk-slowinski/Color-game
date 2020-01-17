@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Color game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <h1>Color game</h1>
+    <div class="rules">Rules are simple: when you press "Draw color" button, random color will appear in left box.
+        You have few seconds to memorize it. Then set up your color as you remembered, using sliders below. When you are
+        ready, press check. Good luck!</div>
+    <div class="colors">
+        <div class="random-color">
+            <div class="color-to-guess"></div>
+            <p class="draw-color-value">Random color: rgb(xxx, xxx, xxx)</p>
+        </div>
+        <button class="active" id="button">Draw color</button>
+        <div class="players-color">
+            <div class="your-color"></div>
+            <p class="players-color-value">Your color: rgb(120, 120, 120)</p>
+        </div>
+    </div>
+    <div class="slide-container">
+        <input type="range" min="0" max="255" value="120" class="red" id="red">
+        <label for="red">Red:</label>
+        <input type="range" min="0" max="255" value="120" class="green" id="green">
+        <label for="green">Green:</label>
+        <input type="range" min="0" max="255" value="120" class="blue" id="blue">
+        <label for="blue">Blue:</label>
+        <div class="accuracy"></div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+
+</html>
