@@ -3,10 +3,9 @@ const slideGreen = document.querySelector('.green');
 const slideBlue = document.querySelector('.blue');
 const randomColor = document.querySelector('.color-to-guess');
 const button = document.querySelector('#button');
-
+const divTimer = document.querySelector('.timer')
 
 const colorsData = ['rgbRed', 'rgbGreen', 'rgbBlue', 'timeOfColorVisible'];
-
 const resultsData = {
     accuracy: 0,
     overallScore: 0,
@@ -62,9 +61,9 @@ function drawColor() {
     randomColor.style.backgroundColor = `rgb(${colorsData[0]}, ${colorsData[1]}, ${colorsData[2]})`;
     colorsData[3] = setTimeout(function () {
         randomColor.style.backgroundColor = '#71919B';
+        randomColor.textContent = '?';
     }, 3000);
 }
-
 
 function buttonHandler(e) {
     const drawColorValue = document.querySelector('.draw-color-value');
@@ -78,6 +77,7 @@ function buttonHandler(e) {
         e.target.textContent = 'Draw color';
         drawColorValue.textContent = `Random color: rgb(${colorsData[0]}, ${colorsData[1]}, ${colorsData[2]})`
         randomColor.style.backgroundColor = `rgb(${colorsData[0]}, ${colorsData[1]}, ${colorsData[2]})`;
+        randomColor.textContent = '';
         clearTimeout(colorsData[3]);
         countAccuracy();
         uploadResults();

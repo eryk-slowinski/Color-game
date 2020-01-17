@@ -21,6 +21,10 @@ p {
     width: 200px;
     border: 2px solid black;
     border-radius: 10px;
+    font-size: 180px;
+    font-weight: bold;
+    text-align: center;
+    color: rgb(60, 60, 119);
 }
 
 .your-color {
