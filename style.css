@@ -56,16 +56,9 @@ div button {
 }
 
 .accuracy {
-
     font-size: 25px;
+    margin: 10px 0;
 }
-
-
-
-
-
-
-
 
 .slide-container {
     display: flex;

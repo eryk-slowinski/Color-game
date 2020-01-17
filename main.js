@@ -1,11 +1,18 @@
 const slideRed = document.querySelector('.red');
 const slideGreen = document.querySelector('.green');
 const slideBlue = document.querySelector('.blue');
+const randomColor = document.querySelector('.color-to-guess');
 const button = document.querySelector('#button');
 
 
-const data = ['rgbRed', 'rgbGreen', 'rgbBlue', 'accuracy'];
-const results = [];
+const colorsData = ['rgbRed', 'rgbGreen', 'rgbBlue', 'timeOfColorVisible'];
+
+const resultsData = {
+    accuracy: 0,
+    overallScore: 0,
+    scores: [],
+    bestScore: 0,
+}
 
 slideRed.addEventListener('input', function () {
     updateColor();
@@ -25,23 +32,39 @@ function updateColor() {
 }
 
 function countAccuracy() {
-    const accuracyRed = (data[0] > slideRed.value) ? slideRed.value / data[0] : data[0] / slideRed.value;
-    const accuracyGreen = (data[1] > slideGreen.value) ? slideGreen.value / data[1] : data[1] / slideGreen.value;
-    const accuracyBlue = (data[2] > slideBlue.value) ? slideBlue.value / data[2] : data[2] / slideBlue.value;
-    const divAccuracy = document.querySelector('.accuracy');
-    data[3] = (((accuracyRed + accuracyGreen + accuracyBlue) / 3) * 100).toFixed(2);
-    results.push(parseFloat(data[3]));
-    const overallAccuracy = results.reduce(function (acc, val) {
+    // Calculating acurracy at one try, saving data in 'resultsData' object
+    const accuracyRed = (colorsData[0] > slideRed.value) ? slideRed.value / colorsData[0] : colorsData[0] / slideRed.value;
+    const accuracyGreen = (colorsData[1] > slideGreen.value) ? slideGreen.value / colorsData[1] : colorsData[1] / slideGreen.value;
+    const accuracyBlue = (colorsData[2] > slideBlue.value) ? slideBlue.value / colorsData[2] : colorsData[2] / slideBlue.value;
+    resultsData.accuracy = (((accuracyRed + accuracyGreen + accuracyBlue) / 3) * 100).toFixed(2);
+    // Calculating accuracy with all shots using array from 'resultsData' object
+    resultsData.scores.push(parseFloat(resultsData.accuracy));
+    resultsData.overallScore = resultsData.scores.reduce(function (acc, val) {
         return acc + val;
-    }, 0) / results.length;
-    divAccuracy.textContent = `Your accuracy is ${data[3]}%! Your overall accuracy is ${overallAccuracy.toFixed(2)}%!`;
+    }, 0) / resultsData.scores.length;
+    // Calculating best score so far
+    resultsData.bestScore = resultsData.scores.reduce(function (a, b) {
+        return Math.max(a, b);
+    })
+}
+
+function uploadResults() {
+    const divAccuracy = document.querySelector('.accuracy');
+    const divOverallAccuracy = document.querySelector('.overall-score');
+    const divBestScore = document.querySelector('.best-score');
+    divAccuracy.textContent = `Your accuracy this time is: ${resultsData.accuracy}%!`;
+    divOverallAccuracy.textContent = `Your overall accuracy is: ${resultsData.overallScore.toFixed(2)}%!`
+    divBestScore.textContent = `Your best score so far is: ${resultsData.bestScore}%!`
 }
 
 function drawColor() {
-    const randomColor = document.querySelector('.color-to-guess');
-    for (let i = 0; i <= 2; i++) data[i] = Math.floor(Math.random() * 256);
-    randomColor.style.backgroundColor = `rgb(${data[0]}, ${data[1]}, ${data[2]})`;
+    for (let i = 0; i <= 2; i++) colorsData[i] = Math.floor(Math.random() * 256);
+    randomColor.style.backgroundColor = `rgb(${colorsData[0]}, ${colorsData[1]}, ${colorsData[2]})`;
+    colorsData[3] = setTimeout(function () {
+        randomColor.style.backgroundColor = '#71919B';
+    }, 3000);
 }
+
 
 function buttonHandler(e) {
     const drawColorValue = document.querySelector('.draw-color-value');
@@ -53,8 +76,11 @@ function buttonHandler(e) {
     } else {
         e.target.classList.toggle('active');
         e.target.textContent = 'Draw color';
+        drawColorValue.textContent = `Random color: rgb(${colorsData[0]}, ${colorsData[1]}, ${colorsData[2]})`
+        randomColor.style.backgroundColor = `rgb(${colorsData[0]}, ${colorsData[1]}, ${colorsData[2]})`;
+        clearTimeout(colorsData[3]);
         countAccuracy();
-        drawColorValue.textContent = `Random color: rgb(${data[0]}, ${data[1]}, ${data[2]})`
+        uploadResults();
     }
 }
 
