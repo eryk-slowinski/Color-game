@@ -20,7 +20,11 @@
             <div class="color-to-guess"></div>
             <p class="draw-color-value">Random color: rgb(xxx, xxx, xxx)</p>
         </div>
-        <button class="active" id="button">Draw color</button>
+        <div class="middle">
+            <div class="timer">0.00</div>
+            <button class="active" id="button">Draw color</button>
+            <div class="accuracy"></div>
+        </div>
         <div class="players-color">
             <div class="your-color"></div>
             <p class="players-color-value">Your color: rgb(120, 120, 120)</p>
@@ -33,7 +37,6 @@
         <label for="green">Green:</label>
         <input type="range" min="0" max="255" value="120" class="blue" id="blue">
         <label for="blue">Blue:</label>
-        <div class="accuracy"></div>
         <div class="accuracy overall-score"></div>
         <div class="accuracy best-score"></div>
     </div>

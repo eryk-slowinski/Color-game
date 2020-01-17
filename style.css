@@ -44,7 +44,7 @@ p {
 div button {
     height: 40px;
     width: 200px;
-    margin: auto 0;
+    margin: 30px 0;
     font-size: 25px;
     padding: 5px;
     background-color: rgb(224, 224, 220);
@@ -59,7 +59,26 @@ div button {
     font-size: 25px;
 }
 
+.middle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.timer {
+    font-size: 30px;
+    height: 35px;
+}
+
 .accuracy {
+    font-size: 20px;
+    height: 30px;
+}
+
+
+.overall-score,
+.best-score {
     font-size: 25px;
     margin: 10px 0;
 }

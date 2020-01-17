@@ -3,7 +3,8 @@ const slideGreen = document.querySelector('.green');
 const slideBlue = document.querySelector('.blue');
 const randomColor = document.querySelector('.color-to-guess');
 const button = document.querySelector('#button');
-const divTimer = document.querySelector('.timer')
+const divAccuracy = document.querySelector('.accuracy');
+const divTimer = document.querySelector('.timer');
 
 const colorsData = ['rgbRed', 'rgbGreen', 'rgbBlue', 'timeOfColorVisible'];
 const resultsData = {
@@ -48,10 +49,9 @@ function countAccuracy() {
 }
 
 function uploadResults() {
-    const divAccuracy = document.querySelector('.accuracy');
     const divOverallAccuracy = document.querySelector('.overall-score');
     const divBestScore = document.querySelector('.best-score');
-    divAccuracy.textContent = `Your accuracy this time is: ${resultsData.accuracy}%!`;
+    divAccuracy.textContent = `Accuracy: ${resultsData.accuracy}%!`;
     divOverallAccuracy.textContent = `Your overall accuracy is: ${resultsData.overallScore.toFixed(2)}%!`
     divBestScore.textContent = `Your best score so far is: ${resultsData.bestScore}%!`
 }
@@ -72,6 +72,7 @@ function buttonHandler(e) {
         e.target.classList.toggle('active');
         e.target.textContent = 'Check';
         drawColorValue.textContent = `Random color: rgb(xxx, xxx, xxx)`
+        divAccuracy.textContent = '';
     } else {
         e.target.classList.toggle('active');
         e.target.textContent = 'Draw color';
