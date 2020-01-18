@@ -33,11 +33,16 @@ function updateColor() {
 }
 
 function countAccuracy() {
-    // Calculating acurracy at one try, saving data in 'resultsData' object
-    const accuracyRed = (colorsData[0] > slideRed.value) ? slideRed.value / colorsData[0] : colorsData[0] / slideRed.value;
-    const accuracyGreen = (colorsData[1] > slideGreen.value) ? slideGreen.value / colorsData[1] : colorsData[1] / slideGreen.value;
-    const accuracyBlue = (colorsData[2] > slideBlue.value) ? slideBlue.value / colorsData[2] : colorsData[2] / slideBlue.value;
-    resultsData.accuracy = (((accuracyRed + accuracyGreen + accuracyBlue) / 3) * 100).toFixed(2);
+    // Calculating acurracy at one try
+    // This calculation assumes if player is more than 100 units from drawed color, his accuracy is 0%
+    // Else, 1 unit difference is -1% from score (at certain R G or B)
+    let accuracyRed = 100 - Math.abs(colorsData[0] - slideRed.value);
+    if (accuracyRed < 0) accuracyRed = 0;
+    let accuracyGreen = 100 - Math.abs(colorsData[1] - slideGreen.value);
+    if (accuracyGreen < 0) accuracyGreen = 0;
+    let accuracyBlue = 100 - Math.abs(colorsData[2] - slideBlue.value);
+    if (accuracyBlue < 0) accuracyBlue = 0;
+    resultsData.accuracy = ((accuracyRed + accuracyGreen + accuracyBlue) / 3).toFixed(2);
     // Calculating accuracy with all shots using array from 'resultsData' object
     resultsData.scores.push(parseFloat(resultsData.accuracy));
     resultsData.overallScore = resultsData.scores.reduce(function (acc, val) {
@@ -88,6 +93,7 @@ function timer() {
         clearTimeout(time);
         divTimer.textContent = '';
         timeLeft = 4;
+        // Calling disableInputs here, so user can manage inputs again when drawed color disappears
         disableInputs(false);
     }
 }
