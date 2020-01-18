@@ -126,3 +126,90 @@ input.green {
 input.blue {
     background: blue;
 }
+
+@media (max-width: 1024px) {
+    h1 {
+        font-size: 40px;
+    }
+
+    p {
+        font-size: 18px;
+        margin-bottom: 15px;
+    }
+
+    .color-to-guess {
+        margin: 20px 50px;
+        height: 180px;
+        width: 180px;
+        font-size: 170px;
+    }
+
+    .your-color {
+        margin: 20px 50px;
+        height: 180px;
+        width: 180px;
+    }
+
+    .rules {
+        width: 70%;
+        margin: 10px auto 40px auto;
+        font-size: 23px;
+    }
+
+    div button {
+        height: 30px;
+        width: 200px;
+        margin: 20px 0;
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 640px) {
+    h1 {
+        font-size: 30px;
+    }
+
+    p {
+        font-size: 15px;
+        margin-bottom: 15px;
+    }
+
+    .rules {
+        width: 80%;
+        margin: 10px auto 30px auto;
+        font-size: 20px;
+    }
+
+    div button {
+        width: 120px;
+        font-size: 17px;
+    }
+
+    .accuracy {
+        font-size: 18px;
+        text-align: center;
+    }
+}
+
+@media (max-width: 420px) and (orientation: portrait) {
+    .colors {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .color-to-guess {
+        margin: 20px auto;
+    }
+
+    .your-color {
+        margin: 20px auto;
+    }
+
+    div button {
+        height: 30px;
+        width: 200px;
+        margin: 10px 0;
+        font-size: 20px;
+    }
+}
