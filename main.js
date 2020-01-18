@@ -66,16 +66,29 @@ function drawColor() {
     }, 4000);
 }
 
+function disableInputs(bool) {
+    if (bool === true) {
+        button.disabled = true;
+        slideRed.disabled = true;
+        slideGreen.disabled = true;
+        slideBlue.disabled = true;
+    } else if (bool === false) {
+        button.disabled = false;
+        slideRed.disabled = false;
+        slideGreen.disabled = false;
+        slideBlue.disabled = false;
+    }
+}
+
 function timer() {
     divTimer.textContent = `${timeLeft}...`;
     timeLeft--;
-    button.disabled = true;
     const time = setTimeout(timer, 1000);
     if (timeLeft < 0) {
         clearTimeout(time);
         divTimer.textContent = '';
         timeLeft = 4;
-        button.disabled = false;
+        disableInputs(false);
     }
 }
 
@@ -88,6 +101,7 @@ function buttonHandler(e) {
         divAccuracy.textContent = '';
         drawColor();
         timer();
+        disableInputs(true);
     } else {
         e.target.classList.toggle('active');
         e.target.textContent = 'Draw color';
