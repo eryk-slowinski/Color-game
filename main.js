@@ -5,6 +5,7 @@ const randomColor = document.querySelector('.color-to-guess');
 const button = document.querySelector('#button');
 const divAccuracy = document.querySelector('.accuracy');
 const divTimer = document.querySelector('.timer');
+let timeLeft = 4;
 
 const colorsData = ['rgbRed', 'rgbGreen', 'rgbBlue', 'timeOfColorVisible'];
 const resultsData = {
@@ -62,17 +63,31 @@ function drawColor() {
     colorsData[3] = setTimeout(function () {
         randomColor.style.backgroundColor = '#71919B';
         randomColor.textContent = '?';
-    }, 3000);
+    }, 4000);
+}
+
+function timer() {
+    divTimer.textContent = `${timeLeft}...`;
+    timeLeft--;
+    button.disabled = true;
+    const time = setTimeout(timer, 1000);
+    if (timeLeft < 0) {
+        clearTimeout(time);
+        divTimer.textContent = '';
+        timeLeft = 4;
+        button.disabled = false;
+    }
 }
 
 function buttonHandler(e) {
     const drawColorValue = document.querySelector('.draw-color-value');
     if (e.target.className === 'active') {
-        drawColor();
         e.target.classList.toggle('active');
         e.target.textContent = 'Check';
         drawColorValue.textContent = `Random color: rgb(xxx, xxx, xxx)`
         divAccuracy.textContent = '';
+        drawColor();
+        timer();
     } else {
         e.target.classList.toggle('active');
         e.target.textContent = 'Draw color';
