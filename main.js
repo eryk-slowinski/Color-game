@@ -6,6 +6,8 @@ const randomColor = document.querySelector('.color-to-guess');
 const button = document.querySelector('#button');
 const divAccuracy = document.querySelector('.accuracy');
 const divTimer = document.querySelector('.timer');
+const yourColor = document.querySelector('.your-color');
+const playersColorValue = document.querySelector('.players-color-value');
 let timeLeft = 4;
 
 const colorsData = ['rgbRed', 'rgbGreen', 'rgbBlue', 'timeOfColorVisible'];
@@ -28,8 +30,6 @@ slideBlue.addEventListener('input', function () {
 
 dynamicColor.addEventListener('input', () => {
     const rgbColor = hexToRgb(dynamicColor.value);
-    const yourColor = document.querySelector('.your-color');
-    const playersColorValue = document.querySelector('.players-color-value');
     yourColor.style.backgroundColor = `rgb(${rgbColor.r}, ${rgbColor.g}, ${rgbColor.b})`;
     playersColorValue.textContent = `Your color: rgb(${rgbColor.r}, ${rgbColor.g}, ${rgbColor.b})`
     slideRed.value = rgbColor.r;
@@ -47,8 +47,6 @@ function hexToRgb(hex) {
 }
 
 function updateColor() {
-    const yourColor = document.querySelector('.your-color');
-    const playersColorValue = document.querySelector('.players-color-value');
     yourColor.style.backgroundColor = `rgb(${slideRed.value}, ${slideGreen.value}, ${slideBlue.value})`;
     playersColorValue.textContent = `Your color: rgb(${slideRed.value}, ${slideGreen.value}, ${slideBlue.value})`
 }
