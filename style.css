@@ -85,6 +85,11 @@ div button {
     margin-top: 40px;
 }
 
+#dynamic {
+    width: 20%;
+    border: none;
+}
+
 .slide-container input {
     -webkit-appearance: none;
     margin: 10px 0;
